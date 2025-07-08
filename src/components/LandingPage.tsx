@@ -25,11 +25,19 @@ const LandingPage = () => {
     return () => observer.disconnect();
   }, []);
 
-  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const openWhatsApp = (message: string) => {
+    const phoneNumber = "5219841904834";
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>, message: string) => {
     const target = e.target as HTMLButtonElement;
     target.style.transform = 'scale(0.95)';
     setTimeout(() => {
       target.style.transform = 'scale(1)';
+      openWhatsApp(message);
     }, 150);
   };
 
@@ -70,13 +78,13 @@ const LandingPage = () => {
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button 
-                onClick={handleButtonClick}
+                onClick={(e) => handleButtonClick(e, "Hola! Me interesa conocer más sobre el Sistema Dual de Aceleración de América 133. ¿Podrían enviarme más información sobre cómo construyen motores comerciales autónomos?")}
                 className="bg-gradient-to-r from-primary to-accent text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-primary/90 hover:to-accent/90 transform hover:scale-105 transition-all duration-300 shadow-2xl h-auto"
               >
                 🧠 Descubre el Sistema Dual
               </Button>
               <Button 
-                onClick={handleButtonClick}
+                onClick={(e) => handleButtonClick(e, "Hola! Necesito evaluar la situación actual de mi empresa. Me gustaría saber si calificamos para el programa de transformación comercial de América 133.")}
                 variant="outline"
                 className="bg-white/20 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/30 transform hover:scale-105 transition-all duration-300 border-white/30 h-auto"
               >
@@ -265,7 +273,7 @@ const LandingPage = () => {
               
               <div className="text-center">
                 <Button 
-                  onClick={handleButtonClick}
+                  onClick={(e) => handleButtonClick(e, "¡Hola! Me interesa agendar el diagnóstico gratuito para mi empresa. Quiero conocer más sobre el Sistema Dual de Aceleración y cómo puede transformar mi negocio. ¿Cuándo podríamos agendar una cita?")}
                   className="bg-gradient-to-r from-primary to-accent text-white px-10 py-4 rounded-full text-xl font-semibold hover:from-primary/90 hover:to-accent/90 transform hover:scale-105 transition-all duration-300 shadow-2xl animate-pulse h-auto"
                 >
                   🚀 Agenda tu Diagnóstico Gratuito
@@ -320,13 +328,13 @@ const LandingPage = () => {
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button 
-                onClick={handleButtonClick}
+                onClick={(e) => handleButtonClick(e, "¡Hola! Quiero agendar mi diagnóstico gratuito con América 133. Estoy listo para transformar mi empresa y necesito conocer cómo el Sistema Dual puede ayudarme. ¿Podemos programar una reunión?")}
                 className="bg-white text-primary px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-2xl h-auto"
               >
                 📞 Agenda tu Diagnóstico Gratuito
               </Button>
               <Button 
-                onClick={handleButtonClick}
+                onClick={(e) => handleButtonClick(e, "Hola! Necesito contactar con el equipo de América 133 para conocer más sobre sus servicios. Mi empresa requiere una transformación comercial y creo que ustedes pueden ayudarnos.")}
                 variant="outline"
                 className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-primary transform hover:scale-105 transition-all duration-300 h-auto"
               >

@@ -1,345 +1,516 @@
-import { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { LanguageSwitcher } from './LanguageSwitcher';
-import { getContent, Language } from '@/lib/content';
+import { useState } from 'react';
+import { Mail, MessageCircle, ArrowRight, CheckCircle2, Zap, Users, TrendingUp } from 'lucide-react';
 
 const LandingPage = () => {
-  const [language, setLanguage] = useState<Language>('es');
-  const content = getContent(language);
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
-  useEffect(() => {
-    // Intersection Observer for animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in-up');
-        }
-      });
-    }, observerOptions);
-
-    // Observe all cards and sections
-    document.querySelectorAll('.card-hover, .metric-card').forEach(el => {
-      observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const openWhatsApp = (message: string) => {
-    const phoneNumber = "5219841904834";
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-    window.open(whatsappUrl, '_blank');
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      window.location.href = `mailto:aldo.francisco@america133.com?subject=GTM%20System%20Architect%20Inquiry&body=Email:%20${email}`;
+      setSubmitted(true);
+    }
   };
 
-  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>, message: string) => {
-    const target = e.target as HTMLButtonElement;
-    target.style.transform = 'scale(0.95)';
-    setTimeout(() => {
-      target.style.transform = 'scale(1)';
-      openWhatsApp(message);
-    }, 150);
-  };
+  const whatsappMessage = encodeURIComponent(
+    "Hola Aldo, estoy interesado en el GTM System Architect program. ¿Podemos agendar una conversación?"
+  );
 
   return (
-    <div className="bg-gray-50 font-inter">
-      {/* Language Switcher */}
-      <div className="fixed top-4 right-4 z-50">
-        <LanguageSwitcher
-          currentLanguage={language}
-          onLanguageChange={setLanguage}
-        />
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+      {/* Navigation */}
+      <nav className="border-b border-slate-700/50 sticky top-0 z-50 bg-slate-900/95 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            Chief Alignment Architect
+          </div>
+          <div className="flex gap-4 items-center">
+            <a href="#offer" className="text-sm text-slate-300 hover:text-white transition">
+              The Offer
+            </a>
+            <a href="#proof" className="text-sm text-slate-300 hover:text-white transition">
+              Track Record
+            </a>
+          </div>
+        </div>
+      </nav>
 
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700">
-        <div className="absolute inset-0 bg-black opacity-20"></div>
-        
-        {/* Animated background elements */}
-        <div className="absolute top-10 left-10 w-72 h-72 bg-primary rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-accent rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-10 left-1/2 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <div className="mb-8">
-              <h1 className="text-6xl md:text-7xl font-black mb-6 leading-tight drop-shadow-lg">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-                  {content.hero.title}
-                </span>
-              </h1>
-              <p className="text-xl md:text-2xl font-light mb-8 text-gray-300">
-                {content.hero.subtitle}
-              </p>
+      {/* HERO SECTION */}
+      <section className="pt-20 pb-16 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="inline-block mb-6 px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-full">
+            <span className="text-red-400 text-sm font-semibold">THE PARADOX EXPOSED</span>
+          </div>
+
+          <h1 className="text-6xl font-bold mb-6 leading-tight">
+            75% of AI Initiatives Fail.
+            <span className="block text-transparent bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text">
+              Here's Why. Here's How to Own the 25%.
+            </span>
+          </h1>
+
+          <p className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+            Companies invest $2M in AI. Only $500K generates results. The problem isn't technology. 
+            It's <span className="text-cyan-400 font-semibold">leadership architecture</span>.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <a
+              href="#offer"
+              className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg font-semibold hover:from-blue-600 hover:to-cyan-600 transition flex items-center justify-center gap-2"
+            >
+              Discover GTM System Architect <ArrowRight size={20} />
+            </a>
+            <a
+              href="#contact"
+              className="px-8 py-4 border border-cyan-400/50 hover:border-cyan-400 rounded-lg font-semibold hover:bg-cyan-500/5 transition"
+            >
+              Free 30-Min Strategy Audit
+            </a>
+          </div>
+
+          {/* Stat Cards */}
+          <div className="grid grid-cols-3 gap-4 mt-16">
+            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4">
+              <div className="text-2xl font-bold text-red-400">75%</div>
+              <div className="text-xs text-slate-400 mt-1">Fail to Scale</div>
             </div>
-            
-            <div className="backdrop-blur-sm bg-white/10 border border-white/20 rounded-2xl p-8 mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 drop-shadow-md">
-                {content.hero.description}
-              </h2>
-              <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
-                Transformamos empresas con alto potencial pero sistemas obsoletos en organizaciones modernas, humanas y eficientes.
-              </p>
+            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4">
+              <div className="text-2xl font-bold text-orange-400">25%</div>
+              <div className="text-xs text-slate-400 mt-1">Hit ROI Targets</div>
             </div>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button 
-                onClick={(e) => handleButtonClick(e, content.hero.cta?.action || '')}
-                className="bg-gradient-to-r from-primary to-accent text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-primary/90 hover:to-accent/90 transform hover:scale-105 transition-all duration-300 shadow-2xl h-auto"
-              >
-                {content.hero.cta?.text}
-              </Button>
-              <Button 
-                onClick={(e) => handleButtonClick(e, "Hola! Necesito evaluar la situación actual de mi empresa. Me gustaría saber si calificamos para el programa de transformación comercial de América 133.")}
-                variant="outline"
-                className="bg-white/20 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/30 transform hover:scale-105 transition-all duration-300 border-white/30 h-auto"
-              >
-                🎯 Evalúa tu Situación
-              </Button>
+            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4">
+              <div className="text-2xl font-bold text-cyan-400">6 Weeks</div>
+              <div className="text-xs text-slate-400 mt-1">To System Design</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Problem Section */}
-      <section className="py-20 bg-gray-900 text-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-red-400">
-              {content.problem.title}
-            </h2>
-            
-            <div className="grid md:grid-cols-2 gap-8 mb-16">
-              {content.problem.problems.map((problem, index) => (
-                <div key={index} className="bg-gray-800 p-8 rounded-2xl card-hover transition-all duration-300 hover:translate-y-[-8px] hover:shadow-2xl">
-                  <div className="text-4xl mb-4">{problem.icon}</div>
-                  <h3 className="text-xl font-bold mb-4">{problem.title}</h3>
-                  <p className="text-gray-300">{problem.description}</p>
-                </div>
-              ))}
+      {/* PROBLEM SECTION */}
+      <section className="py-16 px-6 border-t border-slate-700/50">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-4xl font-bold mb-12 text-center">The Leadership Void: A $1.5T Problem</h2>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Problem 1 */}
+            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-8">
+              <div className="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center mb-4">
+                <span className="text-red-400 font-bold">1</span>
+              </div>
+              <h3 className="text-xl font-bold mb-3">No Clear Owner</h3>
+              <p className="text-slate-300 leading-relaxed">
+                "AI is everywhere, but nobody is formally responsible." —Marc Schmitt, Oxford
+              </p>
+              <p className="text-slate-400 text-sm mt-4 italic">
+                CIO owns infrastructure. CTO owns product. Nobody owns strategy. Result: orphaned technology.
+              </p>
             </div>
-            
-            <div className="bg-gradient-to-r from-red-500 to-pink-500 p-8 rounded-2xl">
-              <h3 className="text-2xl font-bold mb-4">{content.problem.conclusion.title}</h3>
-              <p className="text-lg">{content.problem.conclusion.description}</p>
+
+            {/* Problem 2 */}
+            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-8">
+              <div className="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mb-4">
+                <span className="text-orange-400 font-bold">2</span>
+              </div>
+              <h3 className="text-xl font-bold mb-3">The Strategy-Execution Gap</h3>
+              <p className="text-slate-300 leading-relaxed">
+                Tactics without architecture. Pilots without a master plan. Tools without governance.
+              </p>
+              <p className="text-slate-400 text-sm mt-4 italic">
+                50% describe systems as "fragmented." 84% never scale beyond pilots.
+              </p>
             </div>
+
+            {/* Problem 3 */}
+            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-8">
+              <div className="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center mb-4">
+                <span className="text-yellow-400 font-bold">3</span>
+              </div>
+              <h3 className="text-xl font-bold mb-3">Scattered ROI</h3>
+              <p className="text-slate-300 leading-relaxed">
+                49% invest in AI. Only 25% hit targets. The remaining 24% burn cash without clarity.
+              </p>
+              <p className="text-slate-400 text-sm mt-4 italic">
+                Without governance, every dollar spent is a gamble.
+              </p>
+            </div>
+
+            {/* Problem 4 */}
+            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-8">
+              <div className="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center mb-4">
+                <span className="text-cyan-400 font-bold">4</span>
+              </div>
+              <h3 className="text-xl font-bold mb-3">Risk Multiplied</h3>
+              <p className="text-slate-300 leading-relaxed">
+                Algorithmic bias. Data silos. Compliance gaps. Every ungovernced pilot is a liability.
+              </p>
+              <p className="text-slate-400 text-sm mt-4 italic">
+                Without centralized oversight, you're building tomorrow's scandal today.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-12 bg-gradient-to-r from-red-500/10 to-orange-500/10 border border-red-500/20 rounded-lg p-8 text-center">
+            <p className="text-lg text-slate-100">
+              <span className="font-bold text-red-400">The Brutal Truth:</span> You don't need more AI tools. 
+              You need a <span className="text-cyan-400 font-semibold">system architect</span> who speaks both 
+              business strategy and technical architecture.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Solution Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
-                {content.solution.title}
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                {content.solution.description}
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-12 mb-16">
-              {content.solution.pillars.map((pillar, index) => (
-                <div key={index} className={`bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl card-hover transition-all duration-300 hover:translate-y-[-8px] hover:shadow-2xl`}>
-                  <div className="text-5xl mb-6">{pillar.icon}</div>
-                  <h3 className={`text-2xl font-bold mb-4 ${pillar.color}`}>{pillar.title}</h3>
-                  <ul className="text-gray-700 space-y-3 text-lg">
-                    {pillar.features.map((feature, featureIndex) => (
-                      <li key={featureIndex}>• {feature}</li>
-                    ))}
-                  </ul>
+      {/* SOLUTION SECTION */}
+      <section className="py-16 px-6 border-t border-slate-700/50">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-4xl font-bold mb-12 text-center">The CAA Model: Strategic Orchestration</h2>
+
+          <div className="bg-slate-800/30 border border-slate-700 rounded-xl p-12 mb-12">
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                  <Users className="text-blue-400" size={32} />
                 </div>
-              ))}
+                <h3 className="text-xl font-bold mb-2">Foundational Logic</h3>
+                <p className="text-slate-300 text-sm">
+                  Psychology meets architecture. Clear decision frameworks. Defined accountability.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-cyan-500/20 rounded-lg flex items-center justify-center">
+                  <TrendingUp className="text-cyan-400" size={32} />
+                </div>
+                <h3 className="text-xl font-bold mb-2">Strategic Orchestration</h3>
+                <p className="text-slate-300 text-sm">
+                  12-24 month roadmap. Value-driven prioritization. Scaled execution protocol.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-green-500/20 rounded-lg flex items-center justify-center">
+                  <Zap className="text-green-400" size={32} />
+                </div>
+                <h3 className="text-xl font-bold mb-2">Execution Alignment</h3>
+                <p className="text-slate-300 text-sm">
+                  Real-time measurement. Leadership change acceleration. Governance discipline.
+                </p>
+              </div>
             </div>
-            
-            {/* Process Timeline */}
-            <div className="bg-gray-50 p-8 rounded-2xl">
-              <h3 className="text-2xl font-bold mb-8 text-center text-gray-800">Proceso de Transformación</h3>
-              <div className="grid md:grid-cols-5 gap-4">
-                {content.solution.process.map((step) => (
-                  <div key={step.number} className="text-center">
-                    <div className={`w-16 h-16 ${step.color} rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-4`}>
-                      {step.number}
-                    </div>
-                    <h4 className="font-semibold mb-2">{step.title}</h4>
-                    <p className="text-sm text-gray-600">{step.time}</p>
+          </div>
+
+          <div className="bg-gradient-to-r from-slate-800 to-slate-700 border border-slate-600 rounded-lg p-8 mb-12">
+            <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
+              <span className="text-cyan-400">→</span> Why CAA Works Where Others Fail
+            </h3>
+            <div className="space-y-4">
+              {[
+                { label: "CIO/CTO Focus", caa: "Business-Technology Alignment" },
+                { label: "Fragmented Pilots", caa: "Integrated Scaling Blueprint" },
+                { label: "Unclear ROI", caa: "Value-Driven Governance" },
+                { label: "Siloed Data", caa: "Unified AI Architecture" },
+                { label: "No Accountability", caa: "Clear Ownership Model" }
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-start gap-4">
+                  <div className="text-slate-500 flex-shrink-0">❌</div>
+                  <div className="flex-grow">
+                    <p className="font-semibold text-slate-300">{item.label}</p>
+                    <p className="text-slate-400 text-sm">→ {item.caa}</p>
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Results Section */}
-      <section className="py-20 bg-gray-900 text-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-12">
-              {content.results.title}
-            </h2>
-            
-            <div className="grid md:grid-cols-2 gap-8 mb-16">
-              {content.results.results.map((result, index) => (
-                <div key={index} className="metric-card bg-gradient-to-br from-slate-50 to-slate-200 p-8 rounded-2xl text-gray-800 border border-slate-300/20">
-                  <div className="text-4xl mb-4">{result.icon}</div>
-                  <h3 className="text-xl font-bold mb-2">{result.title}</h3>
-                  <p className="text-gray-600">{result.description}</p>
                 </div>
               ))}
             </div>
-            
-            <div className="bg-gradient-to-r from-green-400 to-primary p-8 rounded-2xl">
-              <h3 className="text-2xl font-bold mb-4">{content.results.guarantee.title}</h3>
-              <p className="text-lg">{content.results.guarantee.description}</p>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
-                {content.pricing.title}
-              </h2>
-              <p className="text-xl text-gray-600">
-                {content.pricing.description}
-              </p>
+      {/* OFFER SECTION */}
+      <section id="offer" className="py-16 px-6 border-t border-slate-700/50 bg-gradient-to-b from-slate-800/30 to-slate-900">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">GTM System Architect</h2>
+            <p className="text-xl text-slate-300">6-Week Strategic System Design • Fixed Price • $20,000 USD</p>
+          </div>
+
+          {/* Offer Cards */}
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            {/* Deliverable 1 */}
+            <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-8 hover:border-cyan-500/50 transition">
+              <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
+                <span className="text-blue-400 font-bold text-lg">1</span>
+              </div>
+              <h3 className="text-lg font-bold mb-4">Strategic Governance Blueprint</h3>
+              <ul className="space-y-3 text-sm text-slate-300 mb-6">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <span>C-Suite Decision Framework</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <span>Authority & Accountability Model</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <span>Risk & Friction Analysis</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <span>Governance Playbook</span>
+                </li>
+              </ul>
+              <p className="text-xs text-slate-400 font-semibold">WEEKS 1-2</p>
             </div>
-            
-            <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 card-hover transition-all duration-300 hover:translate-y-[-8px] hover:shadow-2xl">
-              <div className="text-center mb-8">
-                <div className="text-5xl mb-4">🧠</div>
-                <h3 className="text-3xl font-bold mb-4 text-gray-800">{content.pricing.plan.name}</h3>
-                <p className="text-gray-600">{content.pricing.plan.duration}</p>
+
+            {/* Deliverable 2 */}
+            <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-8 hover:border-cyan-500/50 transition">
+              <div className="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center mb-4">
+                <span className="text-cyan-400 font-bold text-lg">2</span>
               </div>
-              
-              <div className="grid md:grid-cols-2 gap-8 mb-8">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-2">{content.pricing.plan.pricing.fixed}</div>
-                  <p className="text-gray-600">Fee fijo mensual (MXN)</p>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-accent mb-2">{content.pricing.plan.pricing.commission}</div>
-                  <p className="text-gray-600">Comisión sobre ventas incrementales</p>
-                </div>
+              <h3 className="text-lg font-bold mb-4">AI/Digital Roadmap & Value Architecture</h3>
+              <ul className="space-y-3 text-sm text-slate-300 mb-6">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <span>12-24 Month Strategic Roadmap</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <span>Three-Pillar ROI Framework</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <span>KPI Scaffolding & Metrics</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <span>Scaling Protocol</span>
+                </li>
+              </ul>
+              <p className="text-xs text-slate-400 font-semibold">WEEKS 2-4</p>
+            </div>
+
+            {/* Deliverable 3 */}
+            <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-8 hover:border-cyan-500/50 transition">
+              <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-4">
+                <span className="text-green-400 font-bold text-lg">3</span>
               </div>
-              
-              <div className="bg-gray-50 p-6 rounded-2xl mb-8">
-                <h4 className="font-bold mb-4 text-gray-800">Blindaje Contractual Incluido:</h4>
-                <ul className="text-gray-700 space-y-2">
-                  {content.pricing.plan.features.map((feature, index) => (
-                    <li key={index}>✅ {feature}</li>
-                  ))}
+              <h3 className="text-lg font-bold mb-4">Organizational Orchestration System</h3>
+              <ul className="space-y-3 text-sm text-slate-300 mb-6">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <span>AI CoE Blueprint</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <span>60-90 Day Change Sprint</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <span>Governance Dashboard</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <span>First-Sprint Execution Plan</span>
+                </li>
+              </ul>
+              <p className="text-xs text-slate-400 font-semibold">WEEKS 4-6</p>
+            </div>
+          </div>
+
+          {/* The Math */}
+          <div className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-cyan-500/30 rounded-lg p-8 mb-12">
+            <h3 className="text-2xl font-bold mb-6 text-center">The ROI Math (For Your CFO)</h3>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h4 className="font-semibold text-red-400 mb-4">Status Quo Scenario</h4>
+                <ul className="space-y-2 text-slate-300">
+                  <li>• Invest $2M in scattered initiatives</li>
+                  <li>• 75% fail statistically</li>
+                  <li>• $1.5M wasted</li>
+                  <li>• 1-2 scaled successes</li>
+                  <li className="font-bold text-red-400 mt-4">ROI: 25%</li>
                 </ul>
               </div>
-              
+              <div>
+                <h4 className="font-semibold text-green-400 mb-4">With CAA System</h4>
+                <ul className="space-y-2 text-slate-300">
+                  <li>• Same $2M investment</li>
+                  <li>• Coherent governance & roadmap</li>
+                  <li>• 4 initiatives scale</li>
+                  <li>• $1.7M additional value captured</li>
+                  <li className="font-bold text-green-400 mt-4">ROI: 85%+</li>
+                </ul>
+              </div>
+            </div>
+            <div className="mt-8 pt-8 border-t border-cyan-500/20 text-center">
+              <p className="text-lg">
+                <span className="text-cyan-400 font-bold">$20,000 investment pays for itself 60x over in Year 1.</span>
+              </p>
+            </div>
+          </div>
+
+          {/* Who This Is For */}
+          <div className="bg-slate-800/40 border border-slate-700 rounded-lg p-8">
+            <h3 className="text-xl font-bold mb-6">This Is For:</h3>
+            <ul className="grid md:grid-cols-2 gap-4 text-slate-300">
+              {[
+                "Fortune 500 / Mid-Market Companies",
+                "CEOs frustrated with fragmented AI",
+                "CTOs needing strategic governance",
+                "CIOs ready to centralize decision-making",
+                "Organizations with $2M+ AI budgets",
+                "Leaders ready to own their market niche"
+              ].map((item, idx) => (
+                <li key={idx} className="flex items-center gap-2">
+                  <span className="text-cyan-400">✓</span> {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* PROOF SECTION */}
+      <section id="proof" className="py-16 px-6 border-t border-slate-700/50">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-4xl font-bold mb-12 text-center">Why Aldo Is The CAA</h2>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            {/* Proof 1: Architecture Background */}
+            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-8">
+              <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                <span className="text-blue-400">→</span> Foundational Architecture
+              </h3>
+              <p className="text-slate-300 mb-4 leading-relaxed">
+                Deep understanding of organizational systems, mastering the progression from Intelligence through 
+                Prudence to Philanthropy—the Masonic principle of alignment and governance that mirrors strategic orchestration.
+              </p>
+              <p className="text-slate-400 text-sm italic">
+                "Design the System. Own the Niche." isn't a slogan—it's a methodology rooted in architectural logic.
+              </p>
+            </div>
+
+            {/* Proof 2: Clifton DNA */}
+            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-8">
+              <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                <span className="text-cyan-400">→</span> Clifton Strategic DNA
+              </h3>
+              <ul className="space-y-3 text-slate-300 mb-4">
+                <li className="flex items-start gap-2">
+                  <span className="text-cyan-400 font-bold">3.</span>
+                  <span><span className="font-semibold">Intellección:</span> Strategic insight into hidden patterns</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-cyan-400 font-bold">1.</span>
+                  <span><span className="font-semibold">Mando:</span> Command execution & C-Suite authority</span>
+                </li>
+              </ul>
+              <p className="text-slate-400 text-sm italic">
+                The exact DNA required to architect systems and orchestrate alignment.
+              </p>
+            </div>
+          </div>
+
+          {/* Track Record */}
+          <div className="bg-gradient-to-r from-slate-800/50 to-slate-700/50 border border-slate-600 rounded-lg p-8">
+            <h3 className="text-2xl font-bold mb-8 text-center">Proven Track Record</h3>
+            <div className="grid md:grid-cols-3 gap-6">
               <div className="text-center">
-                <Button 
-                  onClick={(e) => handleButtonClick(e, "¡Hola! Me interesa agendar el diagnóstico gratuito para mi empresa. Quiero conocer más sobre el Sistema Dual de Aceleración y cómo puede transformar mi negocio. ¿Cuándo podríamos agendar una cita?")}
-                  className="bg-gradient-to-r from-primary to-accent text-white px-10 py-4 rounded-full text-xl font-semibold hover:from-primary/90 hover:to-accent/90 transform hover:scale-105 transition-all duration-300 shadow-2xl animate-pulse h-auto"
-                >
-                  🚀 Agenda tu Diagnóstico Gratuito
-                </Button>
+                <div className="text-3xl font-bold text-cyan-400 mb-2">$18M+</div>
+                <p className="text-slate-300 text-sm">Revenue Generated</p>
+                <p className="text-slate-400 text-xs mt-1">Built and led high-performing sales teams</p>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-cyan-400 mb-2">96 Hrs</div>
+                <p className="text-slate-300 text-sm">Sales Training Program</p>
+                <p className="text-slate-400 text-xs mt-1">Compressed organizational alignment</p>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-cyan-400 mb-2">100%</div>
+                <p className="text-slate-300 text-sm">Client Alignment Achieved</p>
+                <p className="text-slate-400 text-xs mt-1">Every system designed scales to execution</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-20 bg-gray-900 text-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                {content.team.title}
-              </h2>
-              <p className="text-xl text-gray-300">
-                {content.team.description}
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              {content.team.members.map((member, index) => (
-                <div key={index} className="bg-gray-800 p-8 rounded-2xl card-hover text-center transition-all duration-300 hover:translate-y-[-8px] hover:shadow-2xl">
-                  <div className="text-5xl mb-4">{member.icon}</div>
-                  <h3 className="text-xl font-bold mb-2">{member.name}</h3>
-                  <p className={`${member.color} mb-4`}>{member.role}</p>
-                  <p className="text-gray-300">{member.description}</p>
+      {/* CORE MESSAGE SECTION */}
+      <section className="py-16 px-6 border-t border-slate-700/50 bg-gradient-to-b from-blue-500/5 to-slate-900">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-5xl font-bold mb-6">Design the System.<br />Own the Niche.</h2>
+          <p className="text-xl text-slate-300 mb-8 leading-relaxed">
+            The 75% will spend years experimenting. The 25% spend 6 weeks architecting.
+          </p>
+          <p className="text-lg text-slate-400 italic mb-12">
+            Which will you be?
+          </p>
+        </div>
+      </section>
+
+      {/* CONTACT SECTION */}
+      <section id="contact" className="py-16 px-6 border-t border-slate-700/50">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-4xl font-bold mb-12 text-center">Let's Talk System Architecture</h2>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Email CTA */}
+            <a
+              href="mailto:aldo.francisco@america133.com?subject=GTM%20System%20Architect%20Inquiry"
+              className="bg-gradient-to-br from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-lg p-8 transition transform hover:scale-105"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
+                  <Mail className="text-white" size={24} />
                 </div>
-              ))}
-            </div>
+                <h3 className="text-xl font-bold">Email</h3>
+              </div>
+              <p className="text-blue-100 text-sm mb-4">
+                Send a message to discuss your AI strategy and governance needs.
+              </p>
+              <p className="text-white font-semibold text-sm mb-2">aldo.francisco@america133.com</p>
+              <p className="text-white font-semibold flex items-center gap-2">
+                Open Email Client <ArrowRight size={16} />
+              </p>
+            </a>
+
+            {/* WhatsApp CTA */}
+            <a
+              href={`https://wa.me/5219841904834?text=${whatsappMessage}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gradient-to-br from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 rounded-lg p-8 transition transform hover:scale-105"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
+                  <MessageCircle className="text-white" size={24} />
+                </div>
+                <h3 className="text-xl font-bold">WhatsApp</h3>
+              </div>
+              <p className="text-green-100 text-sm mb-4">
+                Quick conversation about your GTM System Architecture needs.
+              </p>
+              <p className="text-white font-semibold text-sm mb-2">Direct Message</p>
+              <p className="text-white font-semibold flex items-center gap-2">
+                Start on WhatsApp <ArrowRight size={16} />
+              </p>
+            </a>
+          </div>
+
+          {/* Alternative Contact */}
+          <div className="mt-12 pt-12 border-t border-slate-700 text-center">
+            <p className="text-slate-400 mb-4">Or reach out directly:</p>
+            <p className="text-lg font-semibold text-white mb-2">aldo.francisco@america133.com</p>
+            <p className="text-slate-400">Available for strategy calls • Mexico City & Remote</p>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-accent">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              {content.contact.title}
-            </h2>
-            <p className="text-xl mb-8">
-              {content.contact.description}
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button 
-                onClick={(e) => handleButtonClick(e, content.contact.cta.primary.action)}
-                className="bg-white text-primary px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-2xl h-auto"
-              >
-                {content.contact.cta.primary.text}
-              </Button>
-              <Button 
-                onClick={(e) => handleButtonClick(e, content.contact.cta.secondary.action)}
-                variant="outline"
-                className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-primary transform hover:scale-105 transition-all duration-300 h-auto"
-              >
-                {content.contact.cta.secondary.text}
-              </Button>
-            </div>
-            
-            <div className="mt-8 text-sm text-blue-100">
-              <p>{content.contact.disclaimer}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto px-6">
-          <div className="text-center">
-            <div className="mb-6">
-              <h3 className="text-2xl font-bold mb-2">{content.footer.company.name}</h3>
-              <p className="text-gray-400">{content.footer.company.tagline}</p>
-            </div>
-            
-            <div className="flex justify-center space-x-6 mb-6">
-              <a href="https://wa.me/5219841904834" className="text-gray-400 hover:text-green-400 transition-colors">
-                {content.footer.contact.whatsapp}
-              </a>
-              <a href="mailto:aldo.francisco@america133.com" className="text-gray-400 hover:text-primary transition-colors">
-                {content.footer.contact.email}
-              </a>
-            </div>
-            
-            <div className="border-t border-gray-800 pt-6">
-              <p className="text-gray-400">{content.footer.copyright}</p>
-            </div>
-          </div>
+      {/* FOOTER */}
+      <footer className="border-t border-slate-700/50 py-8 px-6 bg-slate-900/50">
+        <div className="max-w-5xl mx-auto text-center text-slate-400 text-sm">
+          <p>© 2025 Aldo Francisco Rodríguez | Chief Alignment Architect</p>
+          <p className="mt-2">"Design the System. Own the Niche."</p>
         </div>
       </footer>
     </div>

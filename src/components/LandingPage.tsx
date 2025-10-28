@@ -376,37 +376,38 @@ const LandingPage = () => {
           <h2 className="text-4xl font-bold mb-12 text-center">Why Aldo Is The CAA</h2>
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {/* Proof 1: Architecture Background */}
+            {/* Proof 1: Proven Systems Architect */}
             <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-8">
               <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                <span className="text-blue-400">→</span> Foundational Architecture
+                <span className="text-blue-400">→</span> Proven Systems Architect
               </h3>
               <p className="text-slate-300 mb-4 leading-relaxed">
-                Deep understanding of organizational systems, mastering the progression from Intelligence through 
-                Prudence to Philanthropy—the Masonic principle of alignment and governance that mirrors strategic orchestration.
+                Decade+ of experience designing organizational systems that scale. Proven track record transforming 
+                chaos into clarity—from <span className="font-semibold text-cyan-400">$250K to $1.5M/month</span> in revenue. 
+                Deep understanding of how intelligence, execution, and human psychology intersect to create sustainable transformation.
               </p>
               <p className="text-slate-400 text-sm italic">
-                "Design the System. Own the Niche." isn't a slogan—it's a methodology rooted in architectural logic.
+                Systems thinking rooted in real-world results, not theory.
               </p>
             </div>
 
-            {/* Proof 2: Clifton DNA */}
+            {/* Proof 2: The Architect's Edge */}
             <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-8">
               <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                <span className="text-cyan-400">→</span> Clifton Strategic DNA
+                <span className="text-cyan-400">→</span> The Architect's Edge
               </h3>
               <ul className="space-y-3 text-slate-300 mb-4">
                 <li className="flex items-start gap-2">
-                  <span className="text-cyan-400 font-bold">3.</span>
-                  <span><span className="font-semibold">Intellección:</span> Strategic insight into hidden patterns</span>
+                  <span className="text-cyan-400 font-bold">•</span>
+                  <span><span className="font-semibold">Psychology-Backed:</span> B.A. in Psychology + AI expertise = systems that enhance human potential, not replace it</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-cyan-400 font-bold">1.</span>
-                  <span><span className="font-semibold">Mando:</span> Command execution & C-Suite authority</span>
+                  <span className="text-cyan-400 font-bold">•</span>
+                  <span><span className="font-semibold">Proven Execution:</span> Built intelligent systems that improved team performance by 20% and reduced churn by 10%</span>
                 </li>
               </ul>
               <p className="text-slate-400 text-sm italic">
-                The exact DNA required to architect systems and orchestrate alignment.
+                The rare combination of technical mastery and human insight needed to architect true alignment.
               </p>
             </div>
           </div>
